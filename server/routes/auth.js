@@ -10,6 +10,10 @@ var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var GoogleStrategy  = require('passport-google-oauth').OAuth2Strategy;
 
+// use passport-stripe or stripe module?
+var StripeStrategy = require('passport-stripe');
+var Stripe = require('stripe')('sk_test_aBAZwgWesuLzaiwvZRoDYy6X');
+
 passport.serializeUser(function(user, done) {
   done(null, user._id);
 });
@@ -136,5 +140,8 @@ module.exports = function(app) {
       res.status(401).end();
     }
   });
+
+  // Stripe URLS
+  // app.post('/charge')
 
 };
