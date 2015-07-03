@@ -27,6 +27,26 @@ var UserSchema = new mongoose.Schema({
       default: '01/00'
     },
     cvc: Number
+  },
+  picture: {
+    type: String,
+    default: 'http://sener.is/hank.gif'
+  },
+  rating: {
+    type: Number,
+    default: 3
+  },
+  reviews: {
+    type: Array,
+    default: []
+  },
+  completedCount: {
+    type: Array,
+    default: 0
+  },
+  paidCount: {
+    type: Array,
+    default: 0
   }
 });
 

@@ -6,25 +6,37 @@ var notify = require("../notify");
 module.exports = function(app, express) {
 
   //return list of all tasks - exclude my tasks
-  app.get('/api/tasks', isAuthenticated, function(req, res){
+  app.get('/api/tasks', isAuthenticated, function(req, res) {
 
     // TODO: take a search query in request params to return
     // search results on 'description/name'
 
-    db.Task.find({$and:[
-        // find ones that are not related to current user
-        {owner: {$ne: req.user._id}},
-        {assignedTo: {$eq: null}},
-        {applicants: {$ne: req.user._id}}
-      ]})
+    db.Task.find({
+        $and: [
+          // find ones that are not related to current user
+          {
+            owner: {
+              $ne: req.user._id
+            }
+          }, {
+            assignedTo: {
+              $eq: null
+            }
+          }, {
+            applicants: {
+              $ne: req.user._id
+            }
+          }
+        ]
+      })
       // there are no joins in mongoose, c'mon..
       // make do with .popluate() instead
 
-      // this gives you `name` only
-      // must call multiple times per mongoose's doc
-      .populate({
-        path: 'owner',  // model property to replace
-        select: 'name'  // looked up ref model property to return
+    // this gives you `name` only
+    // must call multiple times per mongoose's doc
+    .populate({
+        path: 'owner', // model property to replace
+        select: 'name' // looked up ref model property to return
       })
       .populate({
         path: 'assignedTo',
@@ -36,8 +48,8 @@ module.exports = function(app, express) {
       })
       // this will give you everything
       // .populate('owner assignedTo applicants')
-      .exec(function(err, tasks){
-        if(err) {
+      .exec(function(err, tasks) {
+        if (err) {
           res.status(500).end();
         } else {
           res.status(200).send(tasks);
@@ -49,12 +61,22 @@ module.exports = function(app, express) {
   // wher user is owner, assigned to a task or is an applicant
   // adds additional boolean properties on each task
   // 'isOwner', 'isAssignedToMe', 'appliedTo'
-  app.get('/api/mytasks', isAuthenticated, function(req, res){
-    db.Task.find({$or:[
-        {owner: {$eq: req.user._id}},
-        {assignedTo: {$eq: req.user._id}},
-        {applicants: {$eq: req.user._id}}
-      ]})
+  app.get('/api/mytasks', isAuthenticated, function(req, res) {
+    db.Task.find({
+        $or: [{
+          owner: {
+            $eq: req.user._id
+          }
+        }, {
+          assignedTo: {
+            $eq: req.user._id
+          }
+        }, {
+          applicants: {
+            $eq: req.user._id
+          }
+        }]
+      })
       .populate({
         path: 'owner',
         select: 'name'
@@ -68,16 +90,16 @@ module.exports = function(app, express) {
         select: 'name'
       })
       .lean() // allow resulting models to be modifiable
-      .exec(function(err, tasks){
-        if(err) {
+      .exec(function(err, tasks) {
+        if (err) {
           res.status(500).end();
         } else {
-          tasks = _.map(tasks, function(task){
+          tasks = _.map(tasks, function(task) {
             task.isOwner = task.owner._id.equals(req.user._id);
             task.isAssignedToMe = task.assignedTo ? task.assignedTo._id.equals(req.user._id) : false;
             task.appliedTo = _.some(task.applicants, function(user) {
-                return user._id.equals(req.user._id);
-              });
+              return user._id.equals(req.user._id);
+            });
             return task;
           });
           res.status(200).send(tasks);
@@ -86,15 +108,15 @@ module.exports = function(app, express) {
   });
 
   //create new task
-  app.post('/api/tasks', isAuthenticated, function(req, res){
+  app.post('/api/tasks', isAuthenticated, function(req, res) {
     //TODO: do some input valiation on req.body
     db.Task.create({
       owner: new strToMongooseObjectId(req.user._id),
       information: req.body,
       applicants: [],
       assignedTo: null
-    }, function(err, task){
-      if(err) {
+    }, function(err, task) {
+      if (err) {
         res.status(500).end();
       } else {
         res.status(201).send(task);
@@ -104,7 +126,7 @@ module.exports = function(app, express) {
   });
 
   //update information of one specific task.
-  app.post('/api/tasks/:id', isAuthenticated, function(req, res){
+  app.post('/api/tasks/:id', isAuthenticated, function(req, res) {
     var taskId = req.params.id;
     var updatedInformation = req.body;
     //verify task exists and user is owner
@@ -121,12 +143,12 @@ module.exports = function(app, express) {
         path: 'applicants',
         select: 'name'
       })
-      .exec(function(err, task){
-        if(err) {
+      .exec(function(err, task) {
+        if (err) {
           return res.status(500).end();
         }
 
-        if(task == null) {
+        if (task == null) {
           return res.status(404).end();
         }
 
@@ -135,20 +157,47 @@ module.exports = function(app, express) {
           res.status(403).end();
         } else {
           task.information = updatedInformation;
-          task.save(function(err){
-            if(err){
+          task.save(function(err) {
+            if (err) {
               res.status(500).end();
             } else {
               res.status(200).end();
             }
           });
         }
-    });
+      });
+
+  });
+
+  app.post('/api/profile/:id', isAuthenticated, function(req, res) {
+    var userId = req.params.id;
+    
+    //verify task exists and user is owner
+    db.User.findById(userId)
+      .populate({
+        path: 'owner',
+        select: 'name'
+      })
+      .populate({
+        path: 'assignedTo',
+        select: 'name'
+      })
+      .populate({
+        path: 'applicants',
+        select: 'name'
+      })
+      .exec(function(err, tasks) {
+        if (err) {
+          res.status(500).end();
+        } else {
+          res.status(200).send(tasks);
+        }
+      });
 
   });
 
   //get one specific task
-  app.get('/api/tasks/:id', isAuthenticated, function(req, res){
+  app.get('/api/tasks/:id', isAuthenticated, function(req, res) {
     var taskId = req.params.id;
     db.Task.findById(taskId)
       .populate({
@@ -164,16 +213,16 @@ module.exports = function(app, express) {
         select: 'name'
       })
       .lean()
-      .exec(function(err, task){
-        if(err) {
+      .exec(function(err, task) {
+        if (err) {
           return res.status(500).end();
         }
-        if(task) {
+        if (task) {
           task.isOwner = task.owner._id.equals(req.user._id);
           task.isAssignedToMe = task.assignedTo ? task.assignedTo._id.equals(req.user._id) : false;
           task.appliedTo = _.some(task.applicants, function(user) {
-              return user._id.equals(req.user._id);
-            });
+            return user._id.equals(req.user._id);
+          });
           res.status(200).send(task);
         } else {
           res.status(404).end();
@@ -182,18 +231,28 @@ module.exports = function(app, express) {
   });
 
   //delete a task which has not been assigned
-  app.delete('/api/tasks/:id', isAuthenticated, function(req, res){
+  app.delete('/api/tasks/:id', isAuthenticated, function(req, res) {
     var taskId = req.params.id;
 
-    db.Task.remove({$and:[
-      {_id: {$eq: taskId}},
-      {owner: {$eq: req.user._id}},
-      {assignedTo: {$eq: null}}
-    ]}, function(err, task){
-      if(err) {
+    db.Task.remove({
+      $and: [{
+        _id: {
+          $eq: taskId
+        }
+      }, {
+        owner: {
+          $eq: req.user._id
+        }
+      }, {
+        assignedTo: {
+          $eq: null
+        }
+      }]
+    }, function(err, task) {
+      if (err) {
         return res.status(500).end();
       }
-      if(task) {
+      if (task) {
         res.status(200).end();
       } else {
         res.status(403).end();
@@ -202,24 +261,35 @@ module.exports = function(app, express) {
 
   });
 
-  app.post('/api/task/assign', isAuthenticated, function(req, res){
+  app.post('/api/task/assign', isAuthenticated, function(req, res) {
     var taskId = req.body.task;
     var userId = req.body.user;
     //check task is valid, owned by user,
     //not yet assigned and and userId is an applicants
     db.Task.findById(taskId)
-      .where({$and:[
-        {owner: {$eq:req.user._id}},
-        {assignedTo: {$eq: null}},
-        {applicants: {$eq: userId}} // userId is checked against an array of strings by mongoose
-      ]})
-      .exec(function(err, task){
-        if(err) {
+      .where({
+        $and: [{
+            owner: {
+              $eq: req.user._id
+            }
+          }, {
+            assignedTo: {
+              $eq: null
+            }
+          }, {
+            applicants: {
+              $eq: userId
+            }
+          } // userId is checked against an array of strings by mongoose
+        ]
+      })
+      .exec(function(err, task) {
+        if (err) {
           return res.status(500).end();
         }
-        if(task){
+        if (task) {
           task.assignedTo = new strToMongooseObjectId(userId);
-          task.save(function(){
+          task.save(function() {
             res.status(201).end();
             //notify applicant that they have been assigned the task
             notify.taskAssigned(taskId);
@@ -230,56 +300,60 @@ module.exports = function(app, express) {
       });
   });
 
-  app.post('/api/task/apply', isAuthenticated, function(req, res){
+  app.post('/api/task/apply', isAuthenticated, function(req, res) {
     var taskId = req.body.task;
     //Todo - prevent owner from applying and user applying more than once
     db.Task.findById(taskId)
       .where({
-        assignedTo: {$eq: null}
+        assignedTo: {
+          $eq: null
+        }
       })
       .populate({
         path: 'applicants',
         select: 'name'
       })
-      .exec(function(err, task){
-        if(err) {
+      .exec(function(err, task) {
+        if (err) {
           return res.status(500).end();
         }
         if (task) {
           var isApplicant = _.some(task.applicants, function(user) {
-              return user._id.equals(req.user._id);
-            });
+            return user._id.equals(req.user._id);
+          });
 
-          if(!isApplicant){
+          if (!isApplicant) {
             task.applicants.push(new strToMongooseObjectId(req.user._id));
-            task.save(function(){
+            task.save(function() {
               res.status(201).end();
               //notify owner of task of a new application
               notify.newApplication(taskId);
             });
-          } else{
+          } else {
             res.status(403).end();
           }
-        }else{
+        } else {
           res.status(403).end();
         }
       });
   });
 
-  app.get('/api/task/complete/:id', isAuthenticated, function(req, res){
+  app.get('/api/task/complete/:id', isAuthenticated, function(req, res) {
     var taskId = req.params.id;
 
     db.Task.findById(taskId)
       .where({
-        owner: {$eq: req.user._id}
+        owner: {
+          $eq: req.user._id
+        }
       })
-      .exec(function(err, task){
-        if(err){
+      .exec(function(err, task) {
+        if (err) {
           return res.status(500).end();
         }
-        if(task){
+        if (task) {
           task.complete = true;
-          task.save(function(){
+          task.save(function() {
             res.status(200).end();
           });
         } else {
@@ -289,8 +363,8 @@ module.exports = function(app, express) {
   });
 }
 
-function isAuthenticated(req, res, next){
-  if(req.isAuthenticated()) {
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
     next();
   } else {
     res.status(401).end();

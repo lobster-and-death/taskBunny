@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var sessionAuth = require('./routes/auth');
 var tasksAPI = require('./routes/tasks');
+// TODO: uncomment this when done
+// var stripeAPI = require('./routes/stripe');
 
 var app = express();
 
@@ -17,6 +19,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 sessionAuth(app);
 
 tasksAPI(app, express);
+
+// TODO: uncomment this
+// stripeAPI(app, express);
 
 //static content
 app.use(express.static(path.join(__dirname, "../client")));
