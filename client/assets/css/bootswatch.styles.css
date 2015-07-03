@@ -47,7 +47,7 @@ Form
 }
 
 /* new task form */
-#inputName, #inputCity, #inputCity, #inputPhone, #inputEmail {
+#inputName, #inputCity, #inputCity, #inputPhone, #inputEmail, #inputPicture {
   width: 200px;
 }
 #inputCost, #inputDate, #textArea, {

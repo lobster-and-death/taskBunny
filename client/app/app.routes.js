@@ -26,9 +26,21 @@
             templateUrl: 'app/components/taskDetails/task-view.html',
             controller: 'TaskViewController'
         })
+        .when('/profile/:id', {
+            templateUrl: 'app/components/profile/template.html',
+            controller: 'ProfileController'
+        })
         .when('/search', {
             templateUrl: 'app/components/taskSearch/taskSearch.html',
             controller: 'TaskSearchController'
+        })
+        .when('/inbox', {
+            templateUrl: 'app/components/inbox/inbox.html',
+            controller: 'inboxController'
+        })
+        .when('/payment-info', {
+            templateUrl: 'app/components/payment/payment.html',
+            controller: 'paymentController'
         })
         .when('/settings', {
             templateUrl: 'app/components/userSettings/template.html',
