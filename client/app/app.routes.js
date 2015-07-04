@@ -38,6 +38,11 @@
             templateUrl: 'app/components/inbox/inbox.html',
             controller: 'inboxController'
         })
+        .when('/map', {
+            template: '<mapbox callback="callback"></mapbox>',
+            // templateUrl: 'app/components/taskMap/task-map.html',
+            controller: 'TaskMapController'
+        })
         .when('/settings', {
             templateUrl: 'app/components/userSettings/template.html',
             controller: 'SettingsController'
