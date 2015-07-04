@@ -1,4 +1,3 @@
-
 (function() {
   angular.module('trApp')
     .controller('ProfileController', ['$scope', '$location', '$routeParams', 'ProfileService', ProfileController]);
@@ -13,7 +12,7 @@
     // reload task information from server
     $scope.reload = function() {
       console.log("id", _id);
-      ProfileService.retrieveProfile(_id).success(function(data) {        
+      ProfileService.retrieveProfile(_id).success(function(data) {
         console.log("success");
         console.log(data);
         $scope.user = data;
@@ -21,6 +20,10 @@
         console.log(err);
       });
     };
+    $scope.goBack = function() {
+      window.history.back();
+    };
+
     $scope.reload(_id);
   }
 })();

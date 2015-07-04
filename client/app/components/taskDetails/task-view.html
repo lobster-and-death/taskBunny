@@ -4,7 +4,7 @@
   <div ng-show="!editMode">
     <div>Task Status: <em>{{ task.complete ? "Completed" : "Pending"}}</em> </div>
     <ul>
-     <li>Owner: {{ task.owner.name }}</li>
+     <li>Owner: <a ng-click="viewProfile(task.owner._id)">{{ task.owner.name }} </a></li>
      <li>Task: {{ task.information.name }}</li>
      <li>City: {{ task.information.city }}</li>
      <li>Due: {{ deadlineStr }}</li>
@@ -27,7 +27,7 @@
       <div>List of applicants</div>
       <ul>
         <li ng-repeat="user in task.applicants">
-          {{ user.name }} <button ng-show="task.isOwner" ng-click="assignToUser(user._id)" class="btn btn-default">Assign</button>
+          <a ng-click="viewProfile(user._id)">{{ user.name }}</a> <button ng-show="task.isOwner" ng-click="assignToUser(user._id)" class="btn btn-default">Assign</button>          
         </li>
       </ul>
     </div>
