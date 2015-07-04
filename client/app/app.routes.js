@@ -42,6 +42,10 @@
             template: '<mapbox callback="callback"></mapbox>',
             // templateUrl: 'app/components/taskMap/task-map.html',
             controller: 'TaskMapController'
+        })    
+        .when('/payment-info', {
+            templateUrl: 'app/components/payment/payment.html',
+            controller: 'paymentController'
         })
         .when('/settings', {
             templateUrl: 'app/components/userSettings/template.html',
