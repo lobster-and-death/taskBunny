@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 
 var InboxSchema = new mongoose.Schema({
-  from: { type: String, index: { unique: true } },
+  from: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   to: String,
-  recipient: String,
+  category: String,
   message: String,
-  memberSince: String
 });
 
 module.exports = mongoose.model('Inbox', InboxSchema);
