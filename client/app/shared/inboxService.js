@@ -10,7 +10,7 @@
         return $http({
           method: 'POST',
           url: '/api/tasks',
-          data: form
+          data: "testing db"
         }).success(function(task){
           return task;
         }).error(function(err){
