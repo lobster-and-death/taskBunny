@@ -16,7 +16,7 @@
       inbox.update = function(formData) {
         return $http({
           method: 'POST',
-          url: '/inboxes/message',
+          url: '/inboxes',
           data: formData
         });
       }
