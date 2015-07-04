@@ -1,6 +1,15 @@
 <div ng-include="'app/shared/navbar/navbar.html'"> </div>
 
 <div class="container">
+  <div class="form-group">
+        <label for="inputName" class="col-lg-2 control-label">Messages</label>
+        <div class="col-lg-10">
+          <h2> No new messages </h2>
+        </div>
+      </div>
+</div>
+
+<div class="container">
   <form class="form-horizontal animated fadeInDown" ng-submit='sendMessage()'>
     <fieldset>
       <legend class="form-header">Send a Message to a TaskBunny User</legend>
@@ -8,21 +17,21 @@
       <div class="form-group">
         <label for="inputName" class="col-lg-2 control-label">Name of User</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputName" placeholder="Antonio" ng-model="form.name">
+          <input type="text" class="form-control" id="inputName" placeholder="Antonio" ng-model="form.messageName">
         </div>
       </div>
 
       <div class="form-group">
         <label for="inputCity" class="col-lg-2 control-label">Message Category</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputCity" placeholder="Question About Task" ng-model="form.city">
+          <input type="text" class="form-control" id="inputCity" placeholder="Question About Task" ng-model="form.messageCategory">
         </div>
       </div>
 
       <div class="form-group">
         <label for="textArea" class="col-lg-2 control-label">Description</label>
         <div class="col-lg-10">
-          <textarea class="form-control" rows="3" id="textArea" laceholder="How many burritos do you mean by a ridiculous amount of burritos?" ng-model="form.description"></textarea>
+          <textarea class="form-control" rows="3" id="textArea" laceholder="How many burritos do you mean by a ridiculous amount of burritos?" ng-model="form.message"></textarea>
           <!-- <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span> -->
         </div>
       </div>
