@@ -8,6 +8,9 @@
     return {
 
       retrieveUser: function(searchQuery) {
+        console.log("user");
+        console.log(searchQuery);
+
         // returns an array of tasks related to the user
         // each task will have 'isOwner', 'isAssignedToMe', 'appliedTo'
         // boolean properties

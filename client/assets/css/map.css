@@ -1,0 +1,44 @@
+body { margin: 0; padding: 0;}
+
+/*body, html, .leaflet-container {
+  height: 100%;
+  width: 80%;
+}*/
+
+#map { 
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80%;
+  border-right: 1px solid #c0c0c0;
+}
+
+#map, html, .leaflet-container {
+  height: 100%;
+}
+
+#sidebar {
+  position: absolute;
+  top: 0;
+  right: 0; 
+  width: 19%; 
+  height: 100%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  margin-left: 0; 
+  padding-left: 5px;
+}
+#sidebar p { 
+  padding-bottom: 10px; 
+  margin-bottom: 10px; 
+  border-bottom: 1px solid #c0c0c0; 
+}
+
+#sidebar strong { 
+  display: inline-block;
+  width: 50%; 
+}
+
+.icon {
+  webkit-filter: drop-shadow(0px 0px 3px rgba(1, 1, 1, 1));
+}

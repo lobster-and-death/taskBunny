@@ -34,6 +34,19 @@
             templateUrl: 'app/components/taskSearch/taskSearch.html',
             controller: 'TaskSearchController'
         })
+        .when('/inbox', {
+            templateUrl: 'app/components/inbox/inbox.html',
+            controller: 'inboxController'
+        })
+        .when('/map', {
+            template: '<mapbox callback="callback"></mapbox>',
+            // templateUrl: 'app/components/taskMap/task-map.html',
+            controller: 'TaskMapController'
+        })    
+        .when('/payment-info', {
+            templateUrl: 'app/components/payment/payment.html',
+            controller: 'paymentController'
+        })
         .when('/settings', {
             templateUrl: 'app/components/userSettings/template.html',
             controller: 'SettingsController'
