@@ -4,13 +4,13 @@
   <div ng-show="!editMode">
     <div>Task Status: <em>{{ task.complete ? "Completed" : "Pending"}}</em> </div>
     <ul>
-     <li>Owner: <a ng-click="viewProfile(task.owner._id)">{{ task.owner.name }} </a></li>
-     <li>Task: {{ task.information.name }}</li>
-     <li>City: {{ task.information.city }}</li>
-     <li>Due: {{ deadlineStr }}</li>
-     <li>Description: {{ task.information.description }}</li>
-     <li>Fees: {{ task.information.cost }}</li>
-     <img id="displayImage" ng-show="task.information.image" ng-src="{{ task.information.image }}" />
+      <li>Owner: <a ng-click="viewProfile(task.owner._id)">{{ task.owner.name }} </a></li>
+      <li>Task: {{ task.information.name }}</li>
+      <li>City: {{ task.information.city }}</li>
+      <li>Due: {{ deadlineStr }}</li>
+      <li>Description: {{ task.information.description }}</li>
+      <li>Fees: {{ task.information.cost }}</li>
+      <img id="displayImage" ng-show="task.information.image" ng-src="{{ task.information.image }}" />
     </ul>
 
     <button ng-show="task.isOwner && !task.assignedTo && task.applicants.length==0" ng-click="editTask()" class="btn btn-default">Edit</button>
@@ -19,7 +19,19 @@
     <div ng-show="task.assignedTo">
       <!-- assigned person -->
       <div>Task is assigned to: {{ task.assignedTo.name }}</div>
-      <button ng-show="task.isOwner && !task.complete" ng-click="taskComplete()" class="btn btn-default">Set Complete</button>
+      <button ng-show="task.isOwner && !task.complete" ng-click="showReviewField = ! showReviewField" class="btn btn-default">Task Finished</button>
+      <div class="reviewInput" ng-show="showReviewField">
+        <p>Rate {{ task.assignedTo.name }} from one to five stars:
+          <input type="text" class="form-control" id="inputStar" ng-model="task.information.star">
+        </p>
+        <p>Write a review:
+          <input type="text" class="form-control" id="reviewField" placeholder="{{ task.assignedTo.name }} was a superstar!" ng-model="task.information.review">
+        </p>
+        <button ng-show="task.isOwner && !task.complete" ng-click="taskComplete(task.owner._id, task.assignedTo._id)" class="btn btn-default">Submit</button>
+
+      </div>
+
+
     </div>
     <hr>
     <div ng-show="!task.assignedTo">
@@ -27,11 +39,13 @@
       <div>List of applicants</div>
       <ul>
         <li ng-repeat="user in task.applicants">
-          <a ng-click="viewProfile(user._id)">{{ user.name }}</a> <button ng-show="task.isOwner" ng-click="assignToUser(user._id)" class="btn btn-default">Assign</button>          
+          <a ng-click="viewProfile(user._id)">{{ user.name }}</a>
+          <button ng-show="task.isOwner" ng-click="assignToUser(user._id)" class="btn btn-default">Assign</button>
         </li>
       </ul>
     </div>
   </div>
+
 
   <form class="form-horizontal animated fadeInDown" ng-show='editMode'>
     <fieldset>
@@ -53,34 +67,34 @@
         <div class="col-lg-10">
           <input type="date" class="form-control" id="inputDate" placeholder="2011-01-13" ng-model="deadline">
         </div>
-      </div> 
+      </div>
       <div class="form-group">
         <label for="inputCity" class="col-lg-2 control-label">City</label>
         <div class="col-lg-10">
           <input type="text" class="form-control" id="inputCity" placeholder="San Francisco" ng-model="task.information.city">
         </div>
-       </div> 
-       <div class="form-group">
+      </div>
+      <div class="form-group">
         <label for="textArea" class="col-lg-2 control-label">Description</label>
         <div class="col-lg-10">
           <textarea class="form-control" rows="3" id="textArea" ng-model="task.information.description"></textarea>
         </div>
-      </div> 
+      </div>
       <div class="form-group">
         <label for="inputImage" class="col-lg-2 control-label">Image</label>
         <div class="col-lg-10">
           <input type="text" class="form-control" id="inputImage" placeholder="Image Url Here" ng-model="task.information.image">
         </div>
       </div>
-        <span class="help-block"></span>
-        <div class="container">
-          <div class="col-lg-10 col-lg-offset-2">
-            <button class="btn btn-primary" ng-click='updateTask()'>Update</button>
-            <button class="btn btn-danger" ng-click='deleteTask()'>Delete</button>
-            <button class="btn btn-default" ng-click="cancelEditTask()">Cancel</button>
-          </div>
+      <span class="help-block"></span>
+      <div class="container">
+        <div class="col-lg-10 col-lg-offset-2">
+          <button class="btn btn-primary" ng-click='updateTask()'>Update</button>
+          <button class="btn btn-danger" ng-click='deleteTask()'>Delete</button>
+          <button class="btn btn-default" ng-click="cancelEditTask()">Cancel</button>
         </div>
       </div>
-    </fieldset>
-  </form>
+</div>
+</fieldset>
+</form>
 </div>

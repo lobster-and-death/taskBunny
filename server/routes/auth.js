@@ -174,12 +174,78 @@ module.exports = function(app) {
           }
         });
 
+
     } else {
       res.status(401).end();
     }
   });
 
-   app.get('/auth/profile/:id', function(req, res) {
+  app.post('/api/profile/paid/:id', function(req, res) {
+    // console.log("starting")
+      if (req.isAuthenticated()) {
+    console.log("id");
+
+    var userId = req.params.id;
+    console.log(userId);
+    User.findById(userId)
+      .exec(function(err, user) {
+        if (err) {
+          return res.status(500).end();
+        }
+        if (user) {
+          user.paidCount++;
+
+          user.save(function(err) {
+            if (err) {
+              return res.status(500).end();
+            }
+            res.status(201).end();
+          });
+        } else {
+          return res.status(404).end();
+        }
+      });
+
+
+    } else {
+      res.status(401).end();
+    }
+
+  });
+
+  app.post('/api/profile/completed/:id', function(req, res) {
+
+    if (req.isAuthenticated()) {
+      console.log("id");
+      var userId = req.params.id;
+      console.log(userId);
+
+      User.findById(userId)
+        .exec(function(err, user) {
+          if (err) {
+            return res.status(500).end();
+          }
+          if (user) {
+            user.completedCount++;
+
+            user.save(function(err) {
+              if (err) {
+                return res.status(500).end();
+              }
+              res.status(201).end();
+            });
+          } else {
+            return res.status(404).end();
+          }
+        });
+
+
+    } else {
+      res.status(401).end();
+    }
+  });
+
+  app.get('/auth/profile/:id', function(req, res) {
     console.log("wtf")
     var userId = req.params.id;
     //verify task exists and user is owner

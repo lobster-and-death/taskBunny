@@ -1,3 +1,4 @@
+
 var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
@@ -41,11 +42,11 @@ var UserSchema = new mongoose.Schema({
     default: []
   },
   completedCount: {
-    type: Array,
+    type: Number,
     default: 0
   },
   paidCount: {
-    type: Array,
+    type: Number,
     default: 0
   }
 });

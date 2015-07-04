@@ -1,10 +1,10 @@
-(function(){
+(function() {
 
   //load module
   angular.module('trApp')
     .factory('UserService', ['$http', UserService]);
 
-  function UserService($http){
+  function UserService($http) {
     return {
 
       retrieveUser: function(searchQuery) {
@@ -17,9 +17,9 @@
         return $http({
           method: 'GET',
           url: '/api/users',
-        }).success(function(user){
+        }).success(function(user) {
           return user;
-        }).error(function(err){
+        }).error(function(err) {
           console.log(err);
         });
       },
