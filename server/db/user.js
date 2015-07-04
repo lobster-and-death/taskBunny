@@ -17,6 +17,17 @@ var UserSchema = new mongoose.Schema({
     type: String,
     default: 'San Francisco'
   },
+  stripeid: {
+    cardNumber: {
+      type: String,
+      default: '4242 4242 4242 4242'
+    },
+    expire: {
+      type: String,
+      default: '01/00'
+    },
+    cvc: Number
+  },
   picture: {
     type: String,
     default: 'http://sener.is/hank.gif'

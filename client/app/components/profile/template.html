@@ -1,17 +1,20 @@
+
 <div ng-include="'app/shared/navbar/navbar.html'"> </div>
 
-<section data-ng-controller="ProfilesController as profile" data-ng-init="findOne()">
-   
-      <legend class="form-header">{{ profile.name }} </legend>
+<!-- <section data-ng-controller="ProfilesController as profile" data-ng-init="reload()"> -->
+<section ng-model="user">
 
-      <img ng-src="{{ profile.picture }}">
+      <img ng-src="{{ user.picture }}">
+      <legend class="form-header">{{ user.name }}</legend>
 
-      City: {{ profile.city }}
-      Rating: {{ profile.rating }}
-      Tasks Completed: {{ profile.completedCount }}
-      Tasks Paid: {{ profile.paidCount }}
+      <br>City: {{ user.city }}
+      <br>Rating: {{ user.rating }}
+      <br>Tasks Completed: {{ user.completedCount }}
+      <br>Tasks Paid: {{ user.paidCount }}
 
-      Reviews:
-      <li class="reviews" ng-repeat="review in profile.reviews">
+      <br>{{ user.data }}
+
+      <br>Reviews:
+      <li class="reviews" ng-repeat="review in user.reviews">
         
 </section>
