@@ -6,27 +6,20 @@
   function inboxService($http){
       var inbox = {};
 
-      inbox.check = function(form) {
+      inbox.check = function() {
        return $http({
           method: 'GET',
           url: '/inboxes'
         });
       };
 
-      inbox.update = function(card) {
+      inbox.update = function(formData) {
         return $http({
           method: 'POST',
-          url: '/inboxes',
-          data: form
-        }).success(function(message){
-          return message;
-        }).error(function(err){
-          console.log(err);
+          url: '/inboxes/message',
+          data: formData
         });
       }
-      
-      return inbox; 
-      }
-    };
+    return inbox; 
   }
 })();
