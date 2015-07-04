@@ -74,6 +74,10 @@ angular.module('trApp')
       });
     };
 
+    $scope.viewProfile = function(id) {
+      $location.path('/profile/' + id);
+    }
+
     reload(_id);
   };
 
