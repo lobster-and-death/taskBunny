@@ -105,7 +105,36 @@ module.exports = function(app) {
 
   // update payment info if user is authenticated
   app.post('/auth/profile/updateCardInfo', function(req, res, next) {
-    // if (!req.body.)
+    // TODO: check to prevent blank card info
+
+    if (req.isAuthenticated()) {
+      User.findById(req.user._id)
+        .exec(function(err, user) {
+          if (err) {
+            return res.status(500).end();
+          }
+
+          if (user) {
+            console.log('Req card info:');
+            console.log(req.body.number);
+            console.log(req.body.expire);
+            console.log(req.body.cvc);
+
+            user.stripeid.cardNumber = req.body.number;
+            user.stripeid.expire = req.body.expire;
+            user.stripeid.cvc = req.body.cvc;
+
+            user.save(function(err) {
+              if (err) {
+                return res.status(500).end();
+              }
+              res.status(201).end();
+            })
+          } else {
+            return res.status(404).end();
+          }
+        })
+    }
   })
 
   app.post('/auth/profile/update', function(req, res) {
