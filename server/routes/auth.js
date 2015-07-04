@@ -141,16 +141,22 @@ module.exports = function(app) {
     }
   });
 
-  app.get('/profile/:id', function(req, res, next) {
+   app.get('/api/profile/:id', function(req, res) {
     var userId = req.params.id;
-    User.findOne({
-      _id: id
-    }).exec(function(err, user) {
-      if (err) return next(err);
-      if (!user) return next(new Error('Failed to load User ' + id));
-      req.profile = user;
-      next();
-    });
+    console.log("wtf")
+    //verify task exists and user is owner
+    db.users.findById(userId)
+      .populate('_id')
+      .lean()
+      .exec(function(err, profile) {
+        console.log("ok?");
+        if (err) {
+          res.status(500).end();
+        } else {
+          res.status(200).send(profile);
+        }
+      });
+
   });
 
 

@@ -169,28 +169,19 @@ module.exports = function(app, express) {
 
   });
 
-  app.post('/api/profile/:id', isAuthenticated, function(req, res) {
+  app.get('/api/profile/:id', isAuthenticated, function(req, res) {
     var userId = req.params.id;
-    
+    console.log("wtf")
     //verify task exists and user is owner
-    db.User.findById(userId)
-      .populate({
-        path: 'owner',
-        select: 'name'
-      })
-      .populate({
-        path: 'assignedTo',
-        select: 'name'
-      })
-      .populate({
-        path: 'applicants',
-        select: 'name'
-      })
-      .exec(function(err, tasks) {
+    db.users.findById(userId)
+      .populate()
+      .lean()
+      .exec(function(err, profile) {
+        console.log("ok?");
         if (err) {
           res.status(500).end();
         } else {
-          res.status(200).send(tasks);
+          res.status(200).send(profile);
         }
       });
 
