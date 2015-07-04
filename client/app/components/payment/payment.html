@@ -16,6 +16,9 @@
         <label for="inputNumber" class="col-lg-2 control-label">Card number</label>
         <div class="col-lg-10">
 
+          <!-- TODO: make sure this is 16 (number) + 3 (space) char string. Ex:
+                "4242 4242 4242 4242"
+            -->
           <input type="text" class="form-control" id="inputNumber" placeholder="0000 0000 0000 0000" ng-model="card.number">
 
         </div>
@@ -25,6 +28,9 @@
         <label for="inputExpiration" class="col-lg-2 control-label">Expiration Date</label>
         <div class="col-lg-10">
 
+          <!-- TODO: make sure this is 7 char string. Ex:
+                "07 / 06"
+            -->
           <input type="text" class="form-control" id="inputExpiration" placeholder="MM/YY" ng-model="card.expire">
 
         </div>
@@ -34,6 +40,9 @@
         <label for="inputCVC" class="col-lg-2 control-label">CVC</label>
         <div class="col-lg-10">
 
+          <!-- TODO: make sure this is 4 char string. Ex:
+                "1234"
+            -->
           <input type="text" class="form-control" id="inputCVC" placeholder="0000"
           ng-model="card.cvc">
 
@@ -42,7 +51,9 @@
         
       <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
+          <!-- TODO: Make sure all fields are formatted and filled properly -->
           <button class="btn btn-default" ng-click='save()'>Save</button>
+          <span> {{ statusMessage }}</span>
         </div>  
       </div>
 
