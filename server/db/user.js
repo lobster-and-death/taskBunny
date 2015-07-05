@@ -34,8 +34,8 @@ var UserSchema = new mongoose.Schema({
     default: 'http://sener.is/hank.gif'
   },
   rating: {
-    type: Number,
-    default: 3
+    type: Array,
+    default: [0,0]
   },
   reviews: {
     type: Array,
