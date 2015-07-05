@@ -182,29 +182,31 @@ module.exports = function(app) {
 
   app.post('/api/profile/paid/:id', function(req, res) {
     // console.log("starting")
-      if (req.isAuthenticated()) {
-    console.log("id");
+    if (req.isAuthenticated()) {
+      console.log("id");
 
-    var userId = req.params.id;
-    console.log(userId);
-    User.findById(userId)
-      .exec(function(err, user) {
-        if (err) {
-          return res.status(500).end();
-        }
-        if (user) {
-          user.paidCount++;
+      var userId = req.params.id;
+      console.log("userId")
+      console.log(userId);
+      console.log("----")
+      User.findById(userId)
+        .exec(function(err, user) {
+          if (err) {
+            return res.status(500).end();
+          }
+          if (user) {
+            user.paidCount++;
 
-          user.save(function(err) {
-            if (err) {
-              return res.status(500).end();
-            }
-            res.status(201).end();
-          });
-        } else {
-          return res.status(404).end();
-        }
-      });
+            user.save(function(err) {
+              if (err) {
+                return res.status(500).end();
+              }
+              res.status(201).end();
+            });
+          } else {
+            return res.status(404).end();
+          }
+        });
 
 
     } else {
@@ -216,8 +218,14 @@ module.exports = function(app) {
   app.post('/api/profile/completed/:id', function(req, res) {
 
     if (req.isAuthenticated()) {
-      console.log("id");
+      console.log("review");
+      console.log(req.body.review);
+      console.log("reviewer");
+      console.log(req.body.reviewer);
+
       var userId = req.params.id;
+      var review = req.body.review;
+      var reviewer = req.body.reviewer;
       console.log(userId);
 
       User.findById(userId)
@@ -227,6 +235,10 @@ module.exports = function(app) {
           }
           if (user) {
             user.completedCount++;
+            user.reviews.push({
+              review: review,
+              reviewer: reviewer
+            });
 
             user.save(function(err) {
               if (err) {

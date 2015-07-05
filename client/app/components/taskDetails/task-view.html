@@ -18,16 +18,16 @@
 
     <div ng-show="task.assignedTo">
       <!-- assigned person -->
-      <div>Task is assigned to: {{ task.assignedTo.name }}</div>
+      <div>Task is assigned to: <a ng-click="viewProfile(task.assignedTo._id)">{{ task.assignedTo.name }}</a></div>
       <button ng-show="task.isOwner && !task.complete" ng-click="showReviewField = ! showReviewField" class="btn btn-default">Task Finished</button>
       <div class="reviewInput" ng-show="showReviewField">
         <p>Rate {{ task.assignedTo.name }} from one to five stars:
           <input type="text" class="form-control" id="inputStar" ng-model="task.information.star">
         </p>
         <p>Write a review:
-          <input type="text" class="form-control" id="reviewField" placeholder="{{ task.assignedTo.name }} was a superstar!" ng-model="task.information.review">
+          <input type="text" class="form-control" id="reviewField" placeholder="{{ task.assignedTo.name }} was a superstar!" ng-model="task.applReview">
         </p>
-        <button ng-show="task.isOwner && !task.complete" ng-click="taskComplete(task.owner._id, task.assignedTo._id)" class="btn btn-default">Submit</button>
+        <button ng-show="task.isOwner && !task.complete" ng-click="taskComplete(task.owner._id, task.assignedTo._id, task.applReview, task.owner.name)" class="btn btn-default">Submit</button>
 
       </div>
 

@@ -36,12 +36,18 @@
         });
       };
 
-      profile.taskCompleted = function(id) {
+      profile.taskCompleted = function(id, rev, ownr) {
         console.log("task paid");
-
+        console.log(rev);
+        console.log(ownr);
+        var review = {
+          review: rev,
+          reviewer: ownr
+        }
         return $http({
           method: 'POST',
-          url: '/api/profile/completed/' + id
+          url: '/api/profile/completed/' + id,
+          data: review
         }).success(function() {
           console.log("successfully completed incremented");
         }).error(function(err) {

@@ -15,6 +15,6 @@
       
 
       <br><span class="profileField">Reviews:</span>
-      <li class="reviews" ng-repeat="review in user.reviews">
+      <li class="reviews" ng-repeat="review in user.reviews">{{ review.review }} by {{review.reviewer}}</li>
         
 </section>

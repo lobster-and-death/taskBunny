@@ -1,4 +1,3 @@
-
 (function() {
 
   angular.module('trApp')
@@ -69,19 +68,17 @@
       });
     };
 
-    $scope.taskComplete = function(ownr, appl) {
-      console.log(ownr)
-      console.log(appl)
+    $scope.taskComplete = function(ownr, appl, rev, ownrName) {
       AuthService.taskPaid(ownr).success(function() {
         console.log('one down');
-        AuthService.taskCompleted(appl).success(function() {
+        AuthService.taskCompleted(appl, rev, ownrName).success(function() {
           console.log('two down')
           TaskService.setTaskComplete(_id).success(function() {
             $location.path('/tasks');
           }).success(function() {
             console.log("all down!");
             reload();
-          }).catch(function(){
+          }).catch(function() {
             console.log("wut");
           });
         });
