@@ -1,7 +1,12 @@
 var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
-  googleId: { type: String, index: { unique: true } },
+  googleId: {
+    type: String,
+    index: {
+      unique: true
+    }
+  },
   name: String,
   email: String,
   memberSince: String,
@@ -33,19 +38,19 @@ var UserSchema = new mongoose.Schema({
     default: 'http://sener.is/hank.gif'
   },
   rating: {
-    type: Number,
-    default: 3
+    type: Array,
+    default: [0, 0]
   },
   reviews: {
     type: Array,
     default: []
   },
   completedCount: {
-    type: Array,
+    type: Number,
     default: 0
   },
   paidCount: {
-    type: Array,
+    type: Number,
     default: 0
   }
 });
