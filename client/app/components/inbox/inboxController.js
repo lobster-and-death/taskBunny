@@ -2,20 +2,21 @@
 
 //load module
 angular.module('trApp')
-  .controller('inboxController', ['$scope', '$location', inboxController]);
+  .controller('inboxController', ['$scope', '$location', 'inboxService', inboxController]);
 
-  function inboxController($scope, $location, inboxController) {
+  function inboxController($scope, $location, inboxService) {
   	 $scope.form = {};
     // http POST on form submit
-    $scope.createTask = function(){
-      TaskService.addTask($scope.form).success(function(){
+    $scope.createMessage = function(){
+      console.log($scope.form);
+      inboxService.update($scope.form).success(function(){
         $location.path('/tasks');
+        $scope.statusMessage = 'Message posted successfully';
       }).catch(function(err){
         console.log(err);
-        $scope.errorMessage = "task creation error";
+        $scope.errorMessage = "Message posting error";
       });
-    };
+    }
   }
-
 })();
 
