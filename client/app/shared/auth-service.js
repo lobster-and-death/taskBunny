@@ -36,13 +36,14 @@
         });
       };
 
-      profile.taskCompleted = function(id, rev, ownr) {
+      profile.taskCompleted = function(id, rev, ownr, rat) {
         console.log("task paid");
         console.log(rev);
         console.log(ownr);
         var review = {
           review: rev,
-          reviewer: ownr
+          reviewer: ownr,
+          rating: rat
         }
         return $http({
           method: 'POST',

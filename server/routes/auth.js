@@ -226,6 +226,7 @@ module.exports = function(app) {
       var userId = req.params.id;
       var review = req.body.review;
       var reviewer = req.body.reviewer;
+      var rat = req.body.rat;
       console.log(userId);
 
       User.findById(userId)
@@ -239,6 +240,8 @@ module.exports = function(app) {
               review: review,
               reviewer: reviewer
             });
+            user.rating[0]++;
+            user.rating[1] += rat;
 
             user.save(function(err) {
               if (err) {

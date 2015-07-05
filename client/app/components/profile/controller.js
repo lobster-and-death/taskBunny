@@ -16,6 +16,13 @@
         console.log("success");
         console.log(data);
         $scope.user = data;
+        console.log("rating");
+        console.log($scope.user.rating);
+        if ($scope.user.rating[0] === 0) {
+          $scope.rating = "no reviews yet";
+        } else {
+          $scope.rating = $scope.user.rating[1] / $scope.user.rating[0];
+        }
       }).catch(function(err) {
         console.log(err);
       });
@@ -25,6 +32,7 @@
     };
 
     $scope.reload(_id);
+
   }
 })();
 
