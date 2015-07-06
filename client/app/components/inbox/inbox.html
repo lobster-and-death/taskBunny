@@ -9,7 +9,7 @@
               <th> Category </th>
               <th> Message Body </th>
             <tr ng-repeat="messages in messagesData">    
-              <td> {{ messages.from }} </td>
+              <td> <a ng-click="viewProfile(messages.fromId)">{{ messages.from }} </a></td>
               <td> {{ messages.category }} </td>
               <td> {{ messages.message }} </td>
             </tr>
