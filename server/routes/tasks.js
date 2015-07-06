@@ -206,7 +206,23 @@ module.exports = function(app, express) {
           res.status(200).send(profile);
         }
       });
+  });
 
+  app.get('/inboxes', isAuthenticated, function(req, res) {
+    var userId = req.params.id;
+    console.log("getting here")
+    //verify task exists and user is owner
+    db.inboxes.findById(userId)
+      .populate()
+      .lean()
+      .exec(function(err, messages) {
+        console.log("ok?");
+        if (err) {
+          res.status(500).end();
+        } else {
+          res.status(200).send(messages);
+        }
+      });
   });
 
   //get one specific task

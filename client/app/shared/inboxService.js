@@ -6,7 +6,7 @@
   function inboxService($http){
       var inbox = {};
 
-      inbox.check = function() {
+      inbox.check = function(search) {
        return $http({
           method: 'GET',
           url: '/inboxes'
