@@ -18,8 +18,9 @@
         console.log("success");
         console.log(data);
         $scope.user = data;
-        console.log("rating");
-        console.log($scope.user.rating);
+        console.log("data");
+        console.log(data);
+        console.log("--------")
         if ($scope.user.ratingCount === 0) {
           $scope.rating = "no ratings yet";
         } else {
