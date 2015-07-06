@@ -5,11 +5,11 @@
         <table class="task" style="width:75%">
         <h2 ng-model="count"> {{ count }} new messages </h2>
          <tbody>
-              <th> To </th>
+              <th> From </th>
               <th> Category </th>
               <th> Message Body </th>
             <tr ng-repeat="messages in messagesData">    
-              <td> {{ messages.to }} </td>
+              <td> {{ messages.from }} </td>
               <td> {{ messages.category }} </td>
               <td> {{ messages.message }} </td>
             </tr>

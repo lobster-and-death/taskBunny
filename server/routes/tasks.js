@@ -129,7 +129,7 @@ module.exports = function(app, express) {
   app.post('/inboxes', function(req, res) {
     //TODO: do some input valiation on req.body
     db.Message.create({
-      from: req.user.googleId,
+      from: req.user.name,
       to: req.body.messageName,
       category: req.body.messageCategory,
       message: req.body.description
