@@ -1,9 +1,9 @@
 <div ng-include="'app/shared/navbar/navbar.html'"> </div>
 
 <div class="container">
-  <div class="form-group">
-       <h2 ng-model="count"> {{ count }} new messages </h2>
-        <table class="task">
+  <div class="form-group"> 
+        <table class="task" style="width:75%">
+        <h2 ng-model="count"> {{ count }} new messages </h2>
          <tbody>
               <th> To </th>
               <th> Category </th>
@@ -21,7 +21,7 @@
 <div class="container">
   <form class="form-horizontal animated fadeInDown" ng-submit='sendMessage()'>
     <fieldset>
-      <legend class="form-header">Send a Message to a TaskBunny User</legend>
+      <legend class="form-header">Send a Message</legend>
       <div class="form-group">
         <label for="inputName" class="col-lg-2 control-label">Name of User</label>
         <div class="col-lg-10">
