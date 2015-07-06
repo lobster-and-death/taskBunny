@@ -209,7 +209,7 @@ module.exports = function(app, express) {
   });
 
   app.get('/inboxes', function(req, res) {
-    var userId = 'Antonio';
+    var userId = req.user.name;
     // req.user.name 
     // console.log("THIS IS REQ", req);
     console.log(userId);
