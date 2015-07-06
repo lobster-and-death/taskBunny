@@ -21,8 +21,9 @@ var TaskSchema = new mongoose.Schema({
 
   assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   // user._id of user selected by owner to perform task
-  complete: Boolean     
+  complete: Boolean,    
   // set to true by owner when task is complete
+  paid: Boolean
 });
 
 module.exports = mongoose.model('Task', TaskSchema);

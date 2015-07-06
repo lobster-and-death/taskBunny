@@ -13,6 +13,7 @@ if (process.env.NODE_ENV === 'production') {
 
     //mongo connection url
     "MONGODB_URL": process.env.MONGODB_URL,
+    // "MONGODB_URL": process.env.CUSTOMCONNSTR_MONGOLAB_URI,
 
     //azure sengrid cloud email delivery service
     "SENDGRID_USERNAME": process.env.SENDGRID_USERNAME,
