@@ -226,9 +226,11 @@ module.exports = function(app) {
       var userId = req.params.id;
       var review = req.body.review;
       var reviewer = req.body.reviewer;
-      var rat = req.body.rat;
+      console.log("rat")
+      console.log(req.body.rating);
+      var rat = Number(req.body.rating);
       console.log(userId);
-
+      console.log(rat);
       User.findById(userId)
         .exec(function(err, user) {
           if (err) {
@@ -240,9 +242,20 @@ module.exports = function(app) {
               review: review,
               reviewer: reviewer
             });
-            user.rating[0]++;
-            user.rating[1] += rat;
-
+            //  this array won't save. why?
+            //
+            // console.log("rating");
+            // var oldRat = user.rating;
+            // console.log("old");
+            // console.log(oldRat);
+            // oldRat[0] = oldRat[0] + 1;
+            // oldRat[1] = oldRat[1] + rat;
+            // console.log("new");
+            // console.log(oldRat);
+            // user.rating = oldRat;
+            // console.log(user.rating);
+            user.ratingCount++;
+            user.ratingTotal += rat;
             user.save(function(err) {
               if (err) {
                 return res.status(500).end();

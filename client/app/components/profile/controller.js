@@ -1,6 +1,8 @@
 (function() {
   angular.module('trApp')
-    .controller('ProfileController', ['$scope', '$location', '$routeParams', 'ProfileService', ProfileController]);
+    .controller('ProfileController', ['$scope', '$location', '$routeParams',
+      'ProfileService', ProfileController
+    ]);
 
   function ProfileController($scope, $location, $routeParams, ProfileService) {
 
@@ -18,10 +20,10 @@
         $scope.user = data;
         console.log("rating");
         console.log($scope.user.rating);
-        if ($scope.user.rating[0] === 0) {
-          $scope.rating = "no reviews yet";
+        if ($scope.user.ratingCount === 0) {
+          $scope.rating = "no ratings yet";
         } else {
-          $scope.rating = $scope.user.rating[1] / $scope.user.rating[0];
+          $scope.rating = $scope.user.ratingTotal / $scope.user.ratingCount;
         }
       }).catch(function(err) {
         console.log(err);
@@ -35,27 +37,3 @@
 
   }
 })();
-
-
-
-
-// (function() {
-
-//   //load module
-//   angular.module('trApp')
-//     .controller('inboxController', ['$scope', '$location', inboxController]);
-
-//   function inboxController($scope, $location, inboxController) {
-//     $scope.form = {};
-//     // http POST on form submit
-//     $scope.createTask = function() {
-//       TaskService.addTask($scope.form).success(function() {
-//         $location.path('/tasks');
-//       }).catch(function(err) {
-//         console.log(err);
-//         $scope.errorMessage = "task creation error";
-//       });
-//     };
-//   }
-
-// })();
