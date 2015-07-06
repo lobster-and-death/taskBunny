@@ -14,7 +14,7 @@
       <td> {{ task.assignedTo.name }} </td>
       <td> {{ '$' + task.information.cost }} </td>
       <td>
-        <button class="btn btn-success" ng-click='pay(task.assignedTo, task.owner, task.information.cost)'>Pay</button>
+        <button class="btn btn-success" ng-click='pay(task)'>Pay</button>
       </td>
     </tr>
    </tbody>

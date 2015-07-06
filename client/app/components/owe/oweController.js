@@ -10,7 +10,11 @@ angular.module('trApp')
       });
     });
 
-    $scope.pay = function(debtor, owner, cost) {
+    $scope.pay = function(task) {
+      var debtor = task.assignedTo;
+      var owner = task.owner;
+      var cost = task.information.cost;
+
       console.log('Paying:');
       console.log(debtor);
       console.log('Task owner:');
@@ -26,7 +30,8 @@ angular.module('trApp')
         data: {
           stripeOwner: owner,
           stripeDebtor: debtor,
-          amount: cost
+          amount: cost,
+          task: task
         }
       })
       .success(function(data, status) {

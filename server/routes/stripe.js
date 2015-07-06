@@ -6,6 +6,7 @@ module.exports = function(app) {
     var stripeOwner = req.body.stripeOwner;
     var stripeDebtor = req.body.stripeDebtor;
     var amount = parseInt(req.body.amount) * 100; // must be in cents
+    var task = req.body.task;
 
     console.log(stripeOwner);
     console.log(stripeDebtor);
@@ -45,6 +46,7 @@ module.exports = function(app) {
                   if (err) {
                     return res.status(500).end();
                   }
+                  task.paid = true;
                   res.status(201).end();
                 })
               } else {
