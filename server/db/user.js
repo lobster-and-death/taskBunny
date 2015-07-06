@@ -18,15 +18,26 @@ var UserSchema = new mongoose.Schema({
     default: 'San Francisco'
   },
   stripeid: {
+    balance: {
+      type: Number,
+      default: 100
+    },
     cardNumber: {
       type: String,
       default: '4242 4242 4242 4242'
     },
-    expire: {
+    expireMonth: {
       type: String,
-      default: '01/00'
+      default: '01'
     },
-    cvc: Number
+    expireYear: {
+      type: String,
+      default: '00'
+    },
+    cvc: {
+      type: String,
+      default: '1234'
+    }
   },
   picture: {
     type: String,
