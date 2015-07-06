@@ -27,12 +27,14 @@
     // reload task information from server
     var reload = function() {
       TaskService.retrieveTask(_id).success(function(task) {
+        console.log(task.isAssignedToMe);
         $scope.task = task;
         $scope.editMode = false;
         // date is a pesky thing to deal with
         // must always be a Date object for the model per angular's doc
+        console.log($scope.task.information.deadline);
         $scope.deadline = new Date($scope.task.information.deadline);
-        $scope.deadlineStr = moment($scope.deadline).format(
+        $scope.deadlineStr = $scope.task.information.deadline === null ? "flexible" : moment($scope.deadline).format(
           'MMMM Do YYYY');
       });
     };
@@ -74,28 +76,33 @@
     };
 
     $scope.taskComplete = function(ownr, appl, rev, ownrName, rating) {
-      console.log("ownr: ", ownr);
-      console.log("appl: ", appl);
-      console.log("rev: ", rev);
-      console.log("ownrName: ", ownrName);
-      console.log("rating: ", rating);
       AuthService.taskPaid(ownr).success(function() {
-        console.log('one down');
         AuthService.taskCompleted(appl, rev, ownrName, rating).success(
           function() {
-            console.log('two down')
             TaskService.setTaskComplete(_id).success(function() {
               $location.path('/tasks');
             }).success(function() {
-              console.log("all down!");
               reload();
             }).catch(function() {
               console.log("wut");
             });
           });
       });
-
-
+    };
+    // (task.owner._id, task.assignedTo.name, task.ownrReview, task.information.ownerStar)
+    $scope.taskReview = function(ownr, appl, rev, rating) {
+      AuthService.taskReview(ownr, appl, rev, rating)
+        .success(function() {
+          TaskService.setTaskReviewed(_id).success(function() {
+            $location.path('/tasks');
+          });
+        })
+        .success(function() {
+          console.log("review in!");
+          reload();
+        }).catch(function() {
+          console.log("wut");
+        });
     };
 
     $scope.viewProfile = function(id) {

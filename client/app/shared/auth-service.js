@@ -35,13 +35,7 @@
       });
     };
 
-    profile.taskCompleted = function(id, rev, ownr, rat) {
-      console.log("task paid");
-      console.log(rev);
-      console.log(ownr);
-      console.log("rating");
-      console.log(rat);
-      console.log("-------");
+    profile.taskCompleted = function(id, rev, ownr, rat) {      
       var review = {
         review: rev,
         reviewer: ownr,
@@ -57,6 +51,24 @@
         console.log(err);
       });
     };
+
+    profile.taskReview = function(ownr, appl, rev, rating) {
+      var review = {
+        review: rev,
+        reviewer: appl,
+        rating: rating
+      };
+      return $http({
+        method: 'POST',
+        url: '/api/profile/addreview/' + ownr,
+        data: review
+      }).success(function() {
+        console.log("successfully completed incremented");
+      }).error(function(err) {
+        console.log(err);
+      });
+    };
+    
 
 
     return profile;
