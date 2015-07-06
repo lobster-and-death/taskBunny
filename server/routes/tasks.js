@@ -129,22 +129,23 @@ module.exports = function(app, express) {
   app.post('/inboxes', function(req, res) {
     //TODO: do some input valiation on req.body
     db.Message.create({
-      from: "sdasd",
-      to: "xyz",
-      category: "testin",
-      message: "testing"
+      from: "needQuery",
+      to: req.body.messageName,
+      category: req.body.messageCategory,
+      message: req.body.description
     }, function(err, task) {
       if (err) {
         console.log(err);
         console.log("got here, not working");
         res.status(500).end();
       } else {
-        console.log("THIS IS THE REQUEST", req);
+        console.log("THIS IS THE REQUEST", req.params);
         console.log("got here, no working");
         res.status(201).send(task);
       }
     });
   });
+
 
   //update information of one specific task.
   app.post('/api/tasks/:id', isAuthenticated, function(req, res) {
