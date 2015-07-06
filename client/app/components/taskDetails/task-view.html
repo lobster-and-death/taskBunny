@@ -27,7 +27,7 @@
         <p>Write a review:
           <input type="text" class="form-control" id="reviewField" placeholder="{{ task.assignedTo.name }} was a superstar!" ng-model="task.applReview">
         </p>
-        <button ng-show="task.isOwner && !task.complete" ng-click="taskComplete(task.owner._id, task.assignedTo._id, task.applReview, task.owner.name)" class="btn btn-default">Submit</button>
+        <button ng-show="task.isOwner && !task.complete" ng-click="taskComplete(task.owner._id, task.assignedTo._id, task.applReview, task.owner.name, task.information.star)" class="btn btn-default">Submit</button>
 
       </div>
 

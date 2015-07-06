@@ -1,9 +1,12 @@
 (function() {
 
   angular.module('trApp')
-    .controller('TaskViewController', ['$scope', '$location', '$routeParams', 'TaskService', 'AuthService', TaskViewController]);
+    .controller('TaskViewController', ['$scope', '$location', '$routeParams',
+      'TaskService', 'AuthService', TaskViewController
+    ]);
 
-  function TaskViewController($scope, $location, $routeParams, TaskService, AuthService) {
+  function TaskViewController($scope, $location, $routeParams, TaskService,
+    AuthService) {
 
     // get task _id from $rootParams
     var _id = $routeParams.id;
@@ -11,7 +14,8 @@
     $scope.editMode = false;
 
     $scope.editTask = function() {
-      if ($scope.task.isOwner && !$scope.task.assignedTo && $scope.task.applicants.length === 0) {
+      if ($scope.task.isOwner && !$scope.task.assignedTo && $scope.task.applicants
+        .length === 0) {
         $scope.editMode = true;
       }
     };
@@ -28,7 +32,8 @@
         // date is a pesky thing to deal with
         // must always be a Date object for the model per angular's doc
         $scope.deadline = new Date($scope.task.information.deadline);
-        $scope.deadlineStr = moment($scope.deadline).format('MMMM Do YYYY');
+        $scope.deadlineStr = moment($scope.deadline).format(
+          'MMMM Do YYYY');
       });
     };
 
@@ -68,20 +73,26 @@
       });
     };
 
-    $scope.taskComplete = function(ownr, appl, rev, ownrName) {
+    $scope.taskComplete = function(ownr, appl, rev, ownrName, rating) {
+      console.log("ownr: ", ownr);
+      console.log("appl: ", appl);
+      console.log("rev: ", rev);
+      console.log("ownrName: ", ownrName);
+      console.log("rating: ", rating);
       AuthService.taskPaid(ownr).success(function() {
         console.log('one down');
-        AuthService.taskCompleted(appl, rev, ownrName).success(function() {
-          console.log('two down')
-          TaskService.setTaskComplete(_id).success(function() {
-            $location.path('/tasks');
-          }).success(function() {
-            console.log("all down!");
-            reload();
-          }).catch(function() {
-            console.log("wut");
+        AuthService.taskCompleted(appl, rev, ownrName, rating).success(
+          function() {
+            console.log('two down')
+            TaskService.setTaskComplete(_id).success(function() {
+              $location.path('/tasks');
+            }).success(function() {
+              console.log("all down!");
+              reload();
+            }).catch(function() {
+              console.log("wut");
+            });
           });
-        });
       });
 
 
