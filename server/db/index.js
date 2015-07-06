@@ -5,5 +5,6 @@ mongoose.connect(config.MONGODB_URL);
 
 module.exports = {
   User: require('./user.js'),
-  Task: require('./task.js')
+  Task: require('./task.js'),
+  Message: require('./message.js')
 };
