@@ -26,13 +26,11 @@
 
     // reload task information from server
     var reload = function() {
-      TaskService.retrieveTask(_id).success(function(task) {
-        console.log(task.isAssignedToMe);
+      TaskService.retrieveTask(_id).success(function(task) {        
         $scope.task = task;
         $scope.editMode = false;
         // date is a pesky thing to deal with
-        // must always be a Date object for the model per angular's doc
-        console.log($scope.task.information.deadline);
+        // must always be a Date object for the model per angular's doc        
         $scope.deadline = new Date($scope.task.information.deadline);
         $scope.deadlineStr = $scope.task.information.deadline === null ? "flexible" : moment($scope.deadline).format(
           'MMMM Do YYYY');

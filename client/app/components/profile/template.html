@@ -14,6 +14,6 @@
       <br><span class="profileField">Tasks Paid:</span> {{ user.paidCount }}
       <br>
       <br><span class="profileField">Reviews:</span>
-      <li class="reviews" ng-repeat="review in user.reviews">"{{ review.review }}" -- <em>{{review.reviewer}}</em></li>
+      <li class="reviews" ng-repeat="review in user.reviews">{{ review.rating }}/5 "{{ review.review }}" -- <em>{{review.reviewer}}</em></li>
 
 </section>

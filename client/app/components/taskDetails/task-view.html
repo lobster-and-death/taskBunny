@@ -20,91 +20,115 @@
       <!-- assigned person -->
       <div>Task is assigned to: <a ng-click="viewProfile(task.assignedTo._id)">{{ task.assignedTo.name }}</a></div>
       <!-- owner review of applicant -->
-      <button ng-show="task.isOwner && !task.complete" ng-click="showReviewField = ! showReviewField" class="btn btn-default">Task Finished</button>
+      <br><button ng-show="task.isOwner && !task.complete" ng-click="showReviewField = ! showReviewField" class="btn btn-default">Task Finished</button>
       <div class="reviewInput" ng-show="showReviewField">
         <p>Rate {{ task.assignedTo.name }} from one to five stars:
-          <input type="text" class="form-control" id="inputStar" ng-model="task.information.star">
+          
+          <!-- radio -->
+          <div class="radioRating">
+            <input type="radio" ng-model="task.information.star" value="1"> 1
+            <input type="radio" ng-model="task.information.star" value="2"> 2
+            <input type="radio" ng-model="task.information.star" value="3"> 3
+            <input type="radio" ng-model="task.information.star" value="4"> 4
+            <input type="radio" ng-model="task.information.star" value="5"> 5
+          </div>
+          <br/>
+          <!-- end radio -->
+          <!-- <input type="text" class="form-control" id="inputStar" ng-model="task.information.star"> -->
+
         </p>
         <p>Write a review:
-          <input type="text" class="form-control" id="reviewField" placeholder="{{ task.assignedTo.name }} was a superstar!" ng-model="task.applReview">
+          <input type="text" class="form-control" id="reviewField" placeholder="{{ task.assignedTo.name }} was a superstar!" ng-model="task.applReview" required>
         </p>
         <button ng-show="task.isOwner && !task.complete" ng-click="taskComplete(task.owner._id, task.assignedTo._id, task.applReview, task.owner.name, task.information.star)" class="btn btn-default">Submit</button>
 
       </div>
       <!-- applicant's review of owner-->
-      <button ng-show="task.isAssignedToMe && task.complete && !task.reviewed" ng-click="showAppReviewField = ! showAppReviewField" class="btn btn-default">Rate Task Owner</button>
+      <br><button ng-show="task.isAssignedToMe && task.complete && !task.reviewed" ng-click="showAppReviewField = ! showAppReviewField" class="btn btn-default">Rate Task Owner</button>
       <div class="reviewInput" ng-show="showAppReviewField">
         <p>Rate {{ task.owner.name }} from one to five stars:
-          <input type="text" class="form-control" id="inputStar" ng-model="task.information.ownerStar">
+
+          <!-- radio -->
+          <div class="radioRating">
+            <input type="radio" ng-model="task.information.ownerStar" value="1"> 1
+            <input type="radio" ng-model="task.information.ownerStar" value="2"> 2
+            <input type="radio" ng-model="task.information.ownerStar" value="3"> 3
+            <input type="radio" ng-model="task.information.ownerStar" value="4"> 4
+            <input type="radio" ng-model="task.information.ownerStar" value="5"> 5
+          </div>
+          <br/>
+          <!-- end radio -->
+          <!-- <input type="text" class="form-control" id="inputStar" ng-model="task.information.ownerStar"> -->
+
         </p>
         <p>Write a review:
           <input type="text" class="form-control" id="reviewField" placeholder="{{ task.owner.name }} was super nice!" ng-model="task.ownrReview">
         </p>
-        <button ng-show="task.isAssignedToMe" && task.complete && !task.reviewed" ng-click="taskReview(task.owner._id, task.assignedTo.name, task.ownrReview, task.information.ownerStar)" class="btn btn-default">Submit</button>
+        <button ng-show="task.isAssignedToMe" && task.complete && !task.reviewed " ng-click="taskReview(task.owner._id, task.assignedTo.name, task.ownrReview, task.information.ownerStar) " class="btn btn-default ">Submit</button>
 
       </div>
 
 
     </div>
     <hr>
-    <div ng-show="!task.assignedTo">
+    <div ng-show="!task.assignedTo ">
       <!-- list of applicants -->
       <div>List of applicants</div>
       <ul>
-        <li ng-repeat="user in task.applicants">
-          <a ng-click="viewProfile(user._id)">{{ user.name }}</a>
-          <button ng-show="task.isOwner" ng-click="assignToUser(user._id)" class="btn btn-default">Assign</button>
+        <li ng-repeat="user in task.applicants ">
+          <a ng-click="viewProfile(user._id) ">{{ user.name }}</a> 
+          <button ng-show="task.isOwner " ng-click="assignToUser(user._id) " class="btn btn-default ">Assign</button>          
         </li>
       </ul>
     </div>
   </div>
 
 
-  <form class="form-horizontal animated fadeInDown" ng-show='editMode'>
+  <form class="form-horizontal animated fadeInDown " ng-show='editMode'>
     <fieldset>
-      <legend class="form-header">{{ task.information.name }} from {{ task.owner.name }}</legend>
-      <div class="form-group">
-        <label for="inputName" class="col-lg-2 control-label">Name of Task</label>
-        <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputName" placeholder="wash dishes" ng-model="task.information.name">
+      <legend class="form-header ">{{ task.information.name }} from {{ task.owner.name }}</legend>
+      <div class="form-group ">
+        <label for="inputName " class="col-lg-2 control-label ">Name of Task</label>
+        <div class="col-lg-10 ">
+          <input type="text " class="form-control " id="inputName " placeholder="wash dishes " ng-model="task.information.name ">
         </div>
       </div>
-      <div class="form-group">
-        <label for="inputCost" class="col-lg-2 control-label">Cost</label>
-        <div class="col-lg-10">
-          <input type="number" class="form-control" id="inputCost" placeholder="$10" ng-model="task.information.cost">
+      <div class="form-group ">
+        <label for="inputCost " class="col-lg-2 control-label ">Cost</label>
+        <div class="col-lg-10 ">
+          <input type="number " class="form-control " id="inputCost " placeholder="$10 " ng-model="task.information.cost ">
         </div>
       </div>
-      <div class="form-group">
-        <label for="inputDate" class="col-lg-2 control-label">Deadline</label>
-        <div class="col-lg-10">
-          <input type="date" class="form-control" id="inputDate" placeholder="2011-01-13" ng-model="deadline">
+      <div class="form-group ">
+        <label for="inputDate " class="col-lg-2 control-label ">Deadline</label>
+        <div class="col-lg-10 ">
+          <input type="date " class="form-control " id="inputDate " placeholder="2011-01-13 " ng-model="deadline ">
         </div>
       </div>
-      <div class="form-group">
-        <label for="inputCity" class="col-lg-2 control-label">City</label>
-        <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputCity" placeholder="San Francisco" ng-model="task.information.city">
+      <div class="form-group ">
+        <label for="inputCity " class="col-lg-2 control-label ">City</label>
+        <div class="col-lg-10 ">
+          <input type="text " class="form-control " id="inputCity " placeholder="San Francisco " ng-model="task.information.city ">
         </div>
       </div>
-      <div class="form-group">
-        <label for="textArea" class="col-lg-2 control-label">Description</label>
-        <div class="col-lg-10">
-          <textarea class="form-control" rows="3" id="textArea" ng-model="task.information.description"></textarea>
+      <div class="form-group ">
+        <label for="textArea " class="col-lg-2 control-label ">Description</label>
+        <div class="col-lg-10 ">
+          <textarea class="form-control " rows="3 " id="textArea " ng-model="task.information.description "></textarea>
         </div>
       </div>
-      <div class="form-group">
-        <label for="inputImage" class="col-lg-2 control-label">Image</label>
-        <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputImage" placeholder="Image Url Here" ng-model="task.information.image">
+      <div class="form-group ">
+        <label for="inputImage " class="col-lg-2 control-label ">Image</label>
+        <div class="col-lg-10 ">
+          <input type="text " class="form-control " id="inputImage " placeholder="Image Url Here " ng-model="task.information.image ">
         </div>
       </div>
-      <span class="help-block"></span>
-      <div class="container">
-        <div class="col-lg-10 col-lg-offset-2">
-          <button class="btn btn-primary" ng-click='updateTask()'>Update</button>
-          <button class="btn btn-danger" ng-click='deleteTask()'>Delete</button>
-          <button class="btn btn-default" ng-click="cancelEditTask()">Cancel</button>
+      <span class="help-block "></span>
+      <div class="container ">
+        <div class="col-lg-10 col-lg-offset-2 ">
+          <button class="btn btn-primary " ng-click='updateTask()'>Update</button>
+          <button class="btn btn-danger " ng-click='deleteTask()'>Delete</button>
+          <button class="btn btn-default " ng-click="cancelEditTask() ">Cancel</button>
         </div>
       </div>
 </div>
