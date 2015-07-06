@@ -217,20 +217,11 @@ module.exports = function(app) {
 
   app.post('/api/profile/completed/:id', function(req, res) {
 
-    if (req.isAuthenticated()) {
-      console.log("review");
-      console.log(req.body.review);
-      console.log("reviewer");
-      console.log(req.body.reviewer);
-
+    if (req.isAuthenticated()) {      
       var userId = req.params.id;
       var review = req.body.review;
-      var reviewer = req.body.reviewer;
-      console.log("rat")
-      console.log(req.body.rating);
-      var rat = Number(req.body.rating);
-      console.log(userId);
-      console.log(rat);
+      var reviewer = req.body.reviewer;      
+      var rat = Number(req.body.rating);      
       User.findById(userId)
         .exec(function(err, user) {
           if (err) {
@@ -241,19 +232,7 @@ module.exports = function(app) {
             user.reviews.push({
               review: review,
               reviewer: reviewer
-            });
-            //  this array won't save. why?
-            //
-            // console.log("rating");
-            // var oldRat = user.rating;
-            // console.log("old");
-            // console.log(oldRat);
-            // oldRat[0] = oldRat[0] + 1;
-            // oldRat[1] = oldRat[1] + rat;
-            // console.log("new");
-            // console.log(oldRat);
-            // user.rating = oldRat;
-            // console.log(user.rating);
+            });          
             user.ratingCount++;
             user.ratingTotal += rat;
             user.save(function(err) {
@@ -268,6 +247,40 @@ module.exports = function(app) {
         });
 
 
+    } else {
+      res.status(401).end();
+    }
+  });
+
+  app.post('/api/profile/addreview/:id', function(req, res) {
+
+    if (req.isAuthenticated()) {      
+      var userId = req.params.id;
+      var review = req.body.review;
+      var reviewer = req.body.reviewer;      
+      var rat = Number(req.body.rating);      
+      User.findById(userId)
+        .exec(function(err, user) {
+          if (err) {
+            return res.status(500).end();
+          }
+          if (user) {            
+            user.reviews.push({
+              review: review,
+              reviewer: reviewer
+            });          
+            user.ratingCount++;
+            user.ratingTotal += rat;
+            user.save(function(err) {
+              if (err) {
+                return res.status(500).end();
+              }
+              res.status(201).end();
+            });
+          } else {
+            return res.status(404).end();
+          }
+        });
     } else {
       res.status(401).end();
     }

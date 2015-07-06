@@ -8,7 +8,13 @@ angular.module('trApp')
 
     TaskService.retrieveUserTasks().success(function(tasks){
       tasks = _.map(tasks, function(task){
-        task.information.deadline = moment(Date(task.information.deadline)).format('MMMM Do YYYY');
+        console.log("deadline before");
+        console.log(task.information.deadline);
+        // task.information.deadline = moment(Date(task.information.deadline)).format('MMMM Do YYYY');        
+        task.information.deadline = moment(task.information.deadline).format('MMMM Do YYYY');
+        if (task.information.deadline === "Invalid date") task.information.deadline = "flexible";
+        console.log("deadline after");
+        console.log(task.information.deadline);
         return task;
       });
 

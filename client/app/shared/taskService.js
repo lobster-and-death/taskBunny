@@ -103,7 +103,14 @@
           method: 'GET',
           url: '/api/task/complete/'+taskId
         });
+      },
+      setTaskReviewed: function(taskId) {
+        return $http({
+          method: 'GET',
+          url: '/api/task/reviewed/'+taskId
+        });
       }
+
 
     };
   }
