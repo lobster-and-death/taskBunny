@@ -2,32 +2,38 @@
 
 <div class="container">
   <div class="form-group">
-        <label for="inputName" class="col-lg-2 control-label">Messages</label>
-        <div class="col-lg-10">
-          <h2> No new messages </h2>
-        </div>
-      </div>
+      <label for="inputName" class="col-lg-2 control-label">Messages</label>
+      <h2> No new messages </h2>
+        <table>
+         <tbody>
+            <tr ng-repeat="message in checkMessages">
+              <td> {{ message.messageCategory }} </td>
+              <td> {{ message.description }} </td>
+              <td> me </td>
+            </tr>
+          </tbody>
+        <table>      
+    </div>
 </div>
 
 <div class="container">
   <form class="form-horizontal animated fadeInDown" ng-submit='sendMessage()'>
     <fieldset>
       <legend class="form-header">Send a Message to a TaskBunny User</legend>
-
       <div class="form-group">
         <label for="inputName" class="col-lg-2 control-label">Name of User</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputName" placeholder="Antonio" ng-model="form.messageName">
+          <input type="text" class="form-control" id="inputName" placeholder="Antonio Carusone" ng-model="form.messageName">
         </div>
       </div>
-
+      <br>
       <div class="form-group">
         <label for="inputCity" class="col-lg-2 control-label">Message Category</label>
         <div class="col-lg-10">
           <input type="text" class="form-control" id="inputCity" placeholder="Question About Task" ng-model="form.messageCategory">
         </div>
       </div>
-
+      <br>
       <div class="form-group">
         <label for="textArea" class="col-lg-2 control-label">Description</label>
         <div class="col-lg-10">
@@ -35,7 +41,7 @@
           <!-- <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span> -->
         </div>
       </div>
-        
+      <br>     
       <div class="col-lg-10 col-lg-offset-2">
           <button type="reset" class="btn btn-default" >Cancel</button>
           <button type="submit" class="btn btn-primary" ng-click='createMessage()'>Submit</button>

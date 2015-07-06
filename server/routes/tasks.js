@@ -210,6 +210,7 @@ module.exports = function(app, express) {
 
   app.get('/inboxes', isAuthenticated, function(req, res) {
     var userId = req.params.id;
+    console.log("THIS IS REQ", req);
     console.log("getting here")
     //verify task exists and user is owner
     db.inboxes.findById(userId)

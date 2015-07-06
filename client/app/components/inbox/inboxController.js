@@ -7,7 +7,7 @@ angular.module('trApp')
   function inboxController($scope, $location, inboxService) {
   	 $scope.form = {};
     
-    inboxService.check().success(function(messages){
+    inboxService.checkMessages().success(function(messages){
         return messages;
       });
 
