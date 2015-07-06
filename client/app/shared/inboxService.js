@@ -11,6 +11,7 @@
           method: 'GET',
           url: '/inboxes'
         }).success(function(messages){
+          console.log("service messages", messages);
           return messages;
         }).error(function(err){
           console.log(err);
