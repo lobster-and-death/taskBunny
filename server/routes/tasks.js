@@ -208,22 +208,26 @@ module.exports = function(app, express) {
       });
   });
 
-  app.get('/inboxes', isAuthenticated, function(req, res) {
-    var userId = req.user.name;
+  app.get('/inboxes', function(req, res) {
+    var userId = 'Antonio';
+    // req.user.name 
     // console.log("THIS IS REQ", req);
     console.log(userId);
     console.log("getting here")
     //verify task exists and user is owner
-    db.Message.findById(userId)
-      .populate()
-      .lean()
+    db.Message.find({ to: userId })
+      // .populate()
+      // .lean()
       .exec(function(err, messages) {
         console.log("ok?");
         if (err) {
+          console.log("mistake");
+          console.log(messages);
           res.status(500).end();
-        } else {
-          res.status(200).send(messages);
-        }
+        } 
+        console.log("here");
+        console.log(messages);
+        res.status(200).send(messages);
       });
   });
 
