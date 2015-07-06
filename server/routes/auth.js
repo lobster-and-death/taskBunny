@@ -232,7 +232,8 @@ module.exports = function(app) {
             user.completedCount++;
             user.reviews.push({
               review: review,
-              reviewer: reviewer
+              reviewer: reviewer,
+              rating: rat
             });
             user.ratingCount++;
             user.ratingTotal += rat;
@@ -268,7 +269,8 @@ module.exports = function(app) {
           if (user) {
             user.reviews.push({
               review: review,
-              reviewer: reviewer
+              reviewer: reviewer,
+              rating: rat
             });
             user.ratingCount++;
             user.ratingTotal += rat;
