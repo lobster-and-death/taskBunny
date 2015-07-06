@@ -8,37 +8,39 @@
 <!-- TODO: custom form validation for stripe
  -->
 <div class="container">
-  <form class="form-horizontal animated fadeInDown">
+  <form class="form-horizontal animated fadeInDown" id="payment-setting-form">
     <fieldset>
       <legend class="form-header">Update payment method</legend>
 
       <div class="form-group">
         <label for="inputNumber" class="col-lg-2 control-label">Card number</label>
-        <div class="col-lg-10">
+        <div class="col-lg-3">
 
           <!-- TODO: make sure this is 16 (number) + 3 (space) char string. Ex:
                 "4242 4242 4242 4242"
             -->
-          <input type="text" class="form-control" id="inputNumber" placeholder="0000 0000 0000 0000" ng-model="card.number">
+          <input type="text" size="16" class="form-control" id="inputNumber" placeholder="0000 0000 0000 0000" ng-model="card.number">
 
         </div>
       </div>
 
       <div class="form-group">
         <label for="inputExpiration" class="col-lg-2 control-label">Expiration Date</label>
-        <div class="col-lg-10">
+        <div class="col-lg-1">
 
-          <!-- TODO: make sure this is 7 char string. Ex:
-                "07 / 06"
-            -->
-          <input type="text" class="form-control" id="inputExpiration" placeholder="MM/YY" ng-model="card.expire">
+          <input type="text" size="2" class="form-control" id="inputExpirationMonth" placeholder="MM" ng-model="card.expireMonth">
+
+        </div>
+        <div class="col-lg-1">
+          
+          <input type="text" size="2" class="form-control" id="inputExpirationYear" placeholder="YY" ng-model="card.expireYear">
 
         </div>
       </div>
 
       <div class="form-group">
         <label for="inputCVC" class="col-lg-2 control-label">CVC</label>
-        <div class="col-lg-10">
+        <div class="col-lg-2">
 
           <!-- TODO: make sure this is 4 char string. Ex:
                 "1234"
