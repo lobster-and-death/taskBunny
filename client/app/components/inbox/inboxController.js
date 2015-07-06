@@ -7,11 +7,13 @@ angular.module('trApp')
   function inboxController($scope, $location, inboxService) {
   	 $scope.form = {};
      $scope.messagesData = {};
+     $scope.count = {};
     
     $scope.reload = function() {
       inboxService.checkMessages().success(function(messages){
           console.log("controller messages", messages);
           $scope.messagesData = messages;
+          $scope.count = messages.length;
           console.log($scope.messagesData);
           return messages;
         });

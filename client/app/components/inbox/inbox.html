@@ -2,15 +2,16 @@
 
 <div class="container">
   <div class="form-group">
-      <label for="inputName" class="col-lg-2 control-label">Messages</label>
-      <h2> No new messages </h2>
-        <table>
+       <h2 ng-model="count"> {{ count }} new messages </h2>
+        <table class="task">
          <tbody>
-            <tr ng-repeat="messages in messagesData">
-             <td> {{ messages.to }} </td>
+              <th> To </th>
+              <th> Category </th>
+              <th> Message Body </th>
+            <tr ng-repeat="messages in messagesData">    
+              <td> {{ messages.to }} </td>
               <td> {{ messages.category }} </td>
               <td> {{ messages.message }} </td>
-              <td> me </td>
             </tr>
           </tbody>
         <table>      
