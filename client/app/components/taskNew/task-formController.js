@@ -9,6 +9,7 @@
 
     // http POST on form submit
     $scope.createTask = function(){
+      console.log($scope.form.deadline);
       TaskService.addTask($scope.form).success(function(){
         $location.path('/tasks');
       }).catch(function(err){
