@@ -7,4 +7,4 @@ var InboxSchema = new mongoose.Schema({
   message: String,
 });
 
-module.exports = mongoose.model('Inbox', InboxSchema);
+module.exports = mongoose.model('Message', InboxSchema);
