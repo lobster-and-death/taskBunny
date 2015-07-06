@@ -127,9 +127,13 @@ module.exports = function(app, express) {
 
 
   app.post('/inboxes', function(req, res) {
-    //TODO: do some input valiation on req.body
+    //TODO: do some input valiation on req.body    
+    console.log("------------------------")
+    console.log(req.user._id);
+    console.log("------------------------")
     db.Message.create({
       from: req.user.name,
+      fromId: req.user._id,
       to: req.body.messageName,
       category: req.body.messageCategory,
       message: req.body.description

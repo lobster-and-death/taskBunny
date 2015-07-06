@@ -18,6 +18,12 @@ angular.module('trApp')
           return messages;
         });
     }
+
+    $scope.viewProfile = function(id) {
+      console.log(id);
+      $location.path('/profile/' + id);
+    };
+
     $scope.reload();
     // console.log("testing form Data", $scope.data);
 
