@@ -36,7 +36,7 @@ var UserSchema = new mongoose.Schema({
   picture: {
     type: String,
     default: 'http://sener.is/hank.gif'
-  },  
+  },
   ratingCount: {
     type: Number,
     default: 0
@@ -56,6 +56,10 @@ var UserSchema = new mongoose.Schema({
   paidCount: {
     type: Number,
     default: 0
+  },
+  whole: {
+    type: Object,
+    default: null
   }
 });
 
