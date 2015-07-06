@@ -5,7 +5,7 @@ var path = require('path');
 var sessionAuth = require('./routes/auth');
 var tasksAPI = require('./routes/tasks');
 // TODO: uncomment this when done
-// var stripeAPI = require('./routes/stripe');
+var stripeAPI = require('./routes/stripe');
 
 var app = express();
 
@@ -21,7 +21,7 @@ sessionAuth(app);
 tasksAPI(app, express);
 
 // TODO: uncomment this
-// stripeAPI(app, express);
+stripeAPI(app);
 
 //static content
 app.use(express.static(path.join(__dirname, "../client")));
