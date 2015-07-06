@@ -499,6 +499,7 @@ lobsterdeath
 }
 .profileName {
   margin-top: 10px;
+  margin-bottom: 0px;
   font-weight: 600;
   font-size: 2em;
 }
@@ -509,5 +510,10 @@ lobsterdeath
 }
 .profileField {
   font-weight: 600;
-
+}
+.stars {
+  display: inline-block;
+  margin-bottom: 15px;
+  /*position: relative;*/
+  /*float: right;*/
 }

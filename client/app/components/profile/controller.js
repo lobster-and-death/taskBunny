@@ -13,16 +13,11 @@
 
     // reload task information from server
     $scope.reload = function() {
-      console.log("id", _id);
-      ProfileService.retrieveProfile(_id).success(function(data) {
-        console.log("success");
-        console.log(data);
-        $scope.user = data;
-        console.log("data");
-        console.log(data);
-        console.log("--------")
+      ProfileService.retrieveProfile(_id).success(function(data) {        
+        $scope.user = data;        
         if ($scope.user.ratingCount === 0) {
-          $scope.rating = "no ratings yet";
+          // $scope.rating = "no ratings yet";
+          $scope.rating = 0;          
         } else {
           $scope.rating = $scope.user.ratingTotal / $scope.user.ratingCount;
         }
@@ -33,8 +28,6 @@
     $scope.goBack = function() {
       window.history.back();
     };
-
     $scope.reload(_id);
-
   }
 })();

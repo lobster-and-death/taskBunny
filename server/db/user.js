@@ -7,7 +7,10 @@ var UserSchema = new mongoose.Schema({
       unique: true
     }
   },
-  name: String,
+  name: {
+    type: String,
+    default: "anon"
+  },
   email: String,
   memberSince: String,
   preferredEmail: {
