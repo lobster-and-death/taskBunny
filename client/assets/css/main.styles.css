@@ -487,7 +487,7 @@ lobsterdeath
 
 .profile {
   float: center;
-  margin-left: 100px;
+  margin-left: 30%;
   margin-right: auto;
 }
 .profilePic {
@@ -497,12 +497,14 @@ lobsterdeath
   float: center;
 }
 .profileName {
-  margin: 20px;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 2em;
 }
 
 .goBack {
-  float: right;
-  margin-right: 20px;
+  float: left;
+  margin-left: 20px;
 }
 .profileField {
   font-weight: 600;
