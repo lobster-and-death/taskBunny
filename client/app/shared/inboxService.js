@@ -10,6 +10,10 @@
        return $http({
           method: 'GET',
           url: '/inboxes'
+        }).success(function(messages){
+          return messages;
+        }).error(function(err){
+          console.log(err);
         });
       };
 

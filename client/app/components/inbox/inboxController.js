@@ -6,6 +6,11 @@ angular.module('trApp')
 
   function inboxController($scope, $location, inboxService) {
   	 $scope.form = {};
+    
+    inboxService.check().success(function(messages){
+        return messages;
+      });
+
     // http POST on form submit
     $scope.createMessage = function(){
       console.log($scope.form);
