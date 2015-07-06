@@ -41,7 +41,9 @@ passport.use(new GoogleStrategy({
           name: profile.displayName,
           googleId: profile.id,
           email: profile.emails[0].value,
-          memberSince: new Date()
+          memberSince: new Date(),
+          picture: profile._json.image.url.slice(0, profile._json.image
+            .url.length - 6)
         });
         //create and save new user
         user.save(function(err, user) {
@@ -176,24 +178,127 @@ module.exports = function(app) {
           }
         });
 
+
     } else {
       res.status(401).end();
     }
   });
 
-   app.get('/auth/profile/:id', function(req, res) {
+  app.post('/api/profile/paid/:id', function(req, res) {
+    if (req.isAuthenticated()) {
+      console.log("id");
+
+      var userId = req.params.id;
+      console.log("userId")
+      console.log(userId);
+      console.log("----")
+      User.findById(userId)
+        .exec(function(err, user) {
+          if (err) {
+            return res.status(500).end();
+          }
+          if (user) {
+            user.paidCount++;
+
+            user.save(function(err) {
+              if (err) {
+                return res.status(500).end();
+              }
+              res.status(201).end();
+            });
+          } else {
+            return res.status(404).end();
+          }
+        });
+
+
+    } else {
+      res.status(401).end();
+    }
+
+  });
+
+  app.post('/api/profile/completed/:id', function(req, res) {
+
+    if (req.isAuthenticated()) {
+      var userId = req.params.id;
+      var review = req.body.review;
+      var reviewer = req.body.reviewer;
+      var rat = Number(req.body.rating);
+      User.findById(userId)
+        .exec(function(err, user) {
+          if (err) {
+            return res.status(500).end();
+          }
+          if (user) {
+            user.completedCount++;
+            user.reviews.push({
+              review: review,
+              reviewer: reviewer,
+              rating: rat
+            });
+            user.ratingCount++;
+            user.ratingTotal += rat;
+            user.save(function(err) {
+              if (err) {
+                return res.status(500).end();
+              }
+              res.status(201).end();
+            });
+          } else {
+            return res.status(404).end();
+          }
+        });
+
+
+    } else {
+      res.status(401).end();
+    }
+  });
+
+  app.post('/api/profile/addreview/:id', function(req, res) {
+
+    if (req.isAuthenticated()) {
+      var userId = req.params.id;
+      var review = req.body.review;
+      var reviewer = req.body.reviewer;
+      var rat = Number(req.body.rating);
+      User.findById(userId)
+        .exec(function(err, user) {
+          if (err) {
+            return res.status(500).end();
+          }
+          if (user) {
+            user.reviews.push({
+              review: review,
+              reviewer: reviewer,
+              rating: rat
+            });
+            user.ratingCount++;
+            user.ratingTotal += rat;
+            user.save(function(err) {
+              if (err) {
+                return res.status(500).end();
+              }
+              res.status(201).end();
+            });
+          } else {
+            return res.status(404).end();
+          }
+        });
+    } else {
+      res.status(401).end();
+    }
+  });
+
+  app.get('/auth/profile/:id', function(req, res) {
     console.log("wtf")
     var userId = req.params.id;
-    //verify task exists and user is owner
     User.findById(userId)
       .exec(function(err, profile) {
-        console.log("ok?");
-        console.log(profile);
         if (err) {
           res.status(500).end();
         } else {
-          console.log("sending");
-          console.log(req);
           res.status(200).send(profile);
         }
       });

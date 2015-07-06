@@ -479,3 +479,41 @@ Buttons
 .start .start-btn {
   margin-top: 25px
 }
+
+
+/* ==========================================================================
+lobsterdeath
+========================================================================== */
+
+.profile {
+  float: center;
+  margin-left: 30%;
+  margin-right: auto;
+}
+.profilePic {
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  float: center;
+  border: solid 1px white;
+}
+.profileName {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-weight: 600;
+  font-size: 2em;
+}
+
+.goBack {
+  float: left;
+  margin-left: 20px;
+}
+.profileField {
+  font-weight: 600;
+}
+.stars {
+  display: inline-block;
+  margin-bottom: 15px;
+  /*position: relative;*/
+  /*float: right;*/
+}

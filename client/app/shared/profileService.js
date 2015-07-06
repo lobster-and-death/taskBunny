@@ -7,10 +7,7 @@
 
   function ProfileService($http, ProfileService) {
     return {
-      retrieveProfile: function(searchQuery) {
-        // returns an array of tasks related to the profile
-        // each task will have 'isOwner', 'isAssignedToMe', 'appliedTo'
-        // boolean properties
+      retrieveProfile: function(searchQuery) {        
         return $http({
           method: 'GET',
           url: 'auth/profile/' + searchQuery,
@@ -23,31 +20,3 @@
     };
   }
 })();
-
-
-// (function() {
-  
-//   angular.module('trApp')
-//     .factory('PaymentService', ['$http', PaymentService]);
-
-//     function PaymentService($http) {
-//       var payment = {};
-
-//       payment.check = function() {
-//         return $http({
-//           method: 'GET',
-//           url: '/auth/profile/check'
-//         });
-//       };
-
-//       payment.update = function(card) {
-//         return $http({
-//           method: 'POST',
-//           url: '/auth/profile/updateCardInfo',
-//           data: card
-//         });
-//       }
-
-//       return payment;
-//     }
-// })();
