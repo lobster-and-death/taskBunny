@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var InboxSchema = new mongoose.Schema({
-  from: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  from: String,
   to: String,
   category: String,
   message: String,
