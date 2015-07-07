@@ -20,6 +20,10 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
+## Project User Experience
+
+![Tasks Dashboard View](https://i.imgur.com/BstQnrH.gif=300x300)
+
 
 ## Requirements
 
