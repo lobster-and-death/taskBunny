@@ -22,6 +22,10 @@
 
 ## Project User Experience
 
+Creating A Task
+![Creating a Task](https://i.imgur.com/4METJ5N.gif=300x300)
+
+Tasks Dashboard View
 ![Tasks Dashboard View](https://i.imgur.com/BstQnrH.gif=300x300)
 
 
