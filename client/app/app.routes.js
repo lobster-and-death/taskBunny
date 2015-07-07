@@ -47,6 +47,10 @@
             templateUrl: 'app/components/payment/payment.html',
             controller: 'paymentController'
         })
+        .when('/duePayment', {
+            templateUrl: 'app/components/owe/owe.html',
+            controller: 'oweController'
+        })
         .when('/settings', {
             templateUrl: 'app/components/userSettings/template.html',
             controller: 'SettingsController'

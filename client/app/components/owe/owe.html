@@ -1,0 +1,23 @@
+<div ng-include="'app/shared/navbar/navbar.html'"> </div>
+<!--this page should display due payments -->
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-condensed table-hover animated flipInX">
+   <thead>
+    <tr>
+      <tr class="info"><td colspan="8"><strong>All Due Payments</strong></td></tr>
+      <th>Person to pay</th>
+      <th>Amount</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr class="task" ng-repeat="task in tasks">
+      <td> {{ task.assignedTo.name }} </td>
+      <td> {{ '$' + task.information.cost }} </td>
+      <td>
+        <button class="btn btn-success" ng-click='pay(task)'>Pay</button>
+      </td>
+    </tr>
+   </tbody>
+   <span> {{ paymentMessage }}</span>
+  </table>
+</div>

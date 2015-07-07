@@ -119,11 +119,13 @@ module.exports = function(app) {
           if (user) {
             console.log('Req card info:');
             console.log(req.body.number);
-            console.log(req.body.expire);
+            console.log(req.body.expireMonth);
+            console.log(req.body.expireYear);
             console.log(req.body.cvc);
 
             user.stripeid.cardNumber = req.body.number;
-            user.stripeid.expire = req.body.expire;
+            user.stripeid.expireMonth = req.body.expireMonth;
+            user.stripeid.expireYear = req.body.expireYear;
             user.stripeid.cvc = req.body.cvc;
 
             user.save(function(err) {
