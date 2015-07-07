@@ -4,13 +4,13 @@
 
 ## Team
 
-  - __Product Owner__: Bryan
-  - __Scrum Master__: Mokhtar
-  - __Development Team Members__: David, Bryan, Mokhtar
+  - __Product Owner__: Simon Burns
+  - __Scrum Master__: Ronnie Brown
+  - __Development Team Members__: Ronnie, Thomas, Jonathan, Simon
 
 ## Demo
 
-> http://taskbunny.azurewebsites.net
+> http://tasklobster.azurewebsites.net/
 
 ## Table of Contents
 
@@ -20,6 +20,24 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
+## Project User Experience
+Landing Page
+![Landing Page](https://i.imgur.com/ZIsULjc.gif=300x300)
+
+Creating A Task
+![Creating a Task](https://i.imgur.com/4METJ5N.gif=300x300)
+
+Tasks Dashboard View
+![Tasks Dashboard View](https://i.imgur.com/BstQnrH.gif=300x300)
+
+__Additional Features__
+
+Payment page shows outstanding balances for all of a user's tasks. Implemented using Stripe's API.
+
+Inbox allows users to message other users and receive messages. Implemented with MongoDB.
+
+Clicking on a user's name from the task dashboard will bring the user to their profile and enable
+them to give them ratings (star value and comment) which is stored in MongoDB.
 
 ## Requirements
 
@@ -106,3 +124,7 @@ In production set the values of the following environment variables accordingly
     GOOGLE_APP_CALLBACK_URL
 
 See the [server/config.js](server/config.js) for additional configuration environment variables to set.
+
+## External Libraries Used
+Mapbox (showing pins on map)
+Stripe (payment processing)
