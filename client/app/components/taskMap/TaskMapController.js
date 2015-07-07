@@ -1,8 +1,8 @@
 (function(){
 
   //load module
-angular.module('trApp')
-  .controller('TaskMapController', ['$scope', '$location']);
+// angular.module('trApp')
+//   .controller('TaskMapController', ['$scope', '$location']);
 
 angular.module('trApp').directive('mapbox', [
   function () {
