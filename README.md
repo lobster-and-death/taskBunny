@@ -30,6 +30,15 @@ Creating A Task
 Tasks Dashboard View
 ![Tasks Dashboard View](https://i.imgur.com/BstQnrH.gif=300x300)
 
+__Additional Features__
+
+Payment page shows outstanding balances for all of a user's tasks. Implemented using Stripe's API.
+
+Inbox allows users to message other users and receive messages. Implemented with MongoDB.
+
+Clicking on a user's name from the task dashboard will bring the user to their profile and enable
+them to give them ratings (star value and comment) which is stored in MongoDB.
+
 ## Requirements
 
 - Node 0.10.x
